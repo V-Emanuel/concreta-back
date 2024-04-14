@@ -38,6 +38,56 @@ async function main() {
         ]
     });
 
+    await prisma.city.createMany({
+        data: [
+            {
+                name: "Campo Formoso - Sede"
+            },
+            {
+                name: "Campo Formoso - Interior"
+            },
+            {
+                name: "Laje dos Negros"
+            },
+            {
+                name: "Antonio Gonçalves"
+            },
+            {
+                name: "Pindobacú"
+            },
+            {
+                name: "Senhor do bonfim"
+            },
+        ]
+    });
+
+    await prisma.branch.createMany({
+        data: [
+            {
+                name: "Previdenciário"
+            },
+            {
+                name: "Trabalhista"
+            },
+            {
+                name: "Tributário"
+            },
+            {
+                name: "Penal"
+            },
+            {
+                name: "Civil"
+            },
+            {
+                name: "Matrimonial"
+            },
+            {
+                name: "Empresarial"
+            },
+            
+        ]
+    });
+
 }
 
 main()

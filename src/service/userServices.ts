@@ -7,7 +7,12 @@ async function create(body: UserCreate): Promise<void> {
     // if (rowCount) throw errors.duplicatedEmailError(body.email);
     const hashPassword: string = await bcrypt.hash(body.password, 10);
 
-    await userRepositories.create({ name: body.name, email: body.email, password: hashPassword, userStatus: body.userStatus });
+    await userRepositories.create({
+        name: body.name,
+        email: body.email,
+        password: hashPassword,
+        userStatus: body.userStatus
+    });
 }
 
 export default {

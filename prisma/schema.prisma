@@ -21,6 +21,8 @@ model user {
   userStatus Int
   registers register[]
   clients client[]
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
 }
 
 model city {

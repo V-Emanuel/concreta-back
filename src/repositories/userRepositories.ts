@@ -1,5 +1,3 @@
-import connectionDb from "config/database";
-import { QueryResult } from "pg";
 import { UserCreate } from "types/UserCreate";
 import { PrismaClient } from '@prisma/client';
 
