@@ -40,14 +40,14 @@ model branch {
 model register {
   id Int @id @default(autoincrement())
   name String
-  city city @relation(fields: [cityId], references: [id])
-  cityId Int
-  branch branch @relation(fields: [branchId], references: [id])
-  branchId Int
   phone String @db.VarChar(12)
   text String @db.VarChar(255)
   user user @relation(fields: [userId], references: [id])
   userId Int
+  city city @relation(fields: [cityId], references: [id])
+  cityId Int
+  branch branch @relation(fields: [branchId], references: [id])
+  branchId Int
   createAt DateTime @default(now())
   updateAt DateTime @updatedAt
 }
@@ -56,7 +56,7 @@ model client {
   id Int @id @default(autoincrement())
   name String @db.VarChar(50)
   status String @db.VarChar(50)
-  phone String @db.VarChar(12)
+  phone String @db.VarChar(20)
   nationality String @db.VarChar(50)
   maritalStatus String @db.VarChar(50)
   mother String @db.VarChar(50)
