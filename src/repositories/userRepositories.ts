@@ -1,37 +1,35 @@
 import connectionDb from "config/database";
 import { QueryResult } from "pg";
 import { UserCreate } from "types/UserCreate";
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 async function create(body: UserCreate): Promise<void> {
-    await connectionDb.query(
-        `
-            INSERT INTO users (name, email, password, user_status)
-            VALUES ($1, $2, $3, $4)
-        `,
-        [body.name, body.email, body.password, body.user_status]
-    );
+    await prisma.user.create({
+        data: {
+            name: body.name,
+            email: body.email,
+            password: body.password,
+            userStatus: body.userStatus
+        }
+    });
 }
 
-async function findByEmail(email: string): Promise<QueryResult<UserCreate>> {
-    return await connectionDb.query(
-        `
-            SELECT * FROM users WHERE email=$1
-        `,
-        [email]
-    );
-    
+async function findByEmail(email: string): Promise<UserCreate | null> {
+    return await prisma.user.findUnique({
+        where: {
+            email: email,
+        },
+    });
 }
-
-async function findById(id: number): Promise<QueryResult<UserCreate>> {
-    return await connectionDb.query(
-        `
-            SELECT * FROM users WHERE id=$1
-        `,
-        [id]
-    );
-    
+async function findById(id: number): Promise<UserCreate | null> {
+    return await prisma.user.findUnique({
+        where:{
+            id: id,
+        }
+    });
 }
-
 
 export default {
     create,

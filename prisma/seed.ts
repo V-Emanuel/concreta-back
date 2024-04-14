@@ -18,7 +18,7 @@ async function main() {
             },
             {
                 name: 'Viviane',
-                email: 'vinicius@example.com',
+                email: 'viviane@example.com',
                 password: 'viviane123',
                 userStatus: 0
             },

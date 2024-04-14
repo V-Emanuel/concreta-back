@@ -1,32 +1,32 @@
 -- CreateTable
-CREATE TABLE "User" (
+CREATE TABLE "user" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(50) NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "userStatus" INTEGER NOT NULL,
 
-    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "City" (
+CREATE TABLE "city" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(50) NOT NULL,
 
-    CONSTRAINT "City_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "city_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Branch" (
+CREATE TABLE "branch" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(50) NOT NULL,
 
-    CONSTRAINT "Branch_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "branch_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Register" (
+CREATE TABLE "register" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "cityId" INTEGER NOT NULL,
@@ -37,11 +37,11 @@ CREATE TABLE "Register" (
     "updateAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
 
-    CONSTRAINT "Register_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "register_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Client" (
+CREATE TABLE "client" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(50) NOT NULL,
     "status" VARCHAR(50) NOT NULL,
@@ -61,17 +61,20 @@ CREATE TABLE "Client" (
     "comments" JSONB NOT NULL,
     "userId" INTEGER NOT NULL,
 
-    CONSTRAINT "Client_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "client_pkey" PRIMARY KEY ("id")
 );
 
--- AddForeignKey
-ALTER TABLE "Register" ADD CONSTRAINT "Register_cityId_fkey" FOREIGN KEY ("cityId") REFERENCES "City"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+-- CreateIndex
+CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
 
 -- AddForeignKey
-ALTER TABLE "Register" ADD CONSTRAINT "Register_branchId_fkey" FOREIGN KEY ("branchId") REFERENCES "Branch"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "register" ADD CONSTRAINT "register_cityId_fkey" FOREIGN KEY ("cityId") REFERENCES "city"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Register" ADD CONSTRAINT "Register_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "register" ADD CONSTRAINT "register_branchId_fkey" FOREIGN KEY ("branchId") REFERENCES "branch"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Client" ADD CONSTRAINT "Client_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "register" ADD CONSTRAINT "register_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "client" ADD CONSTRAINT "client_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
