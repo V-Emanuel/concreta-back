@@ -3,14 +3,7 @@ import registerRepositories from "repositories/registerRepositories";
 
 async function create(body: RegisterCreate): Promise<void> {
 
-    await registerRepositories.create({
-        name: body.name,
-        phone: body.phone,
-        text: body.text,
-        userId: body.userId,
-        cityId: body.cityId,
-        branchId: body.branchId
-    });
+    await registerRepositories.create(body);
 
 }
 
